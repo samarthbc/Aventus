@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Downloader - Dark Mode</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary': '#1E293B',   // Dark background
+            'secondary': '#334155', // Card background
+            'accent': '#0EA5E9',    // Buttons blue
+            'success': '#10B981',   // Green for ZIP
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-primary text-gray-200 flex items-center justify-center min-h-screen">
+
+  <div class="bg-secondary p-8 rounded-xl shadow-lg space-y-6 w-full max-w-md">
+    <h1 class="text-2xl font-bold text-center">Download Images</h1>
+
+    <!-- Malicious Image -->
+    <div class="space-y-3">
+      <h2 class="text-lg font-semibold">Malicious Image</h2>
+      <div class="flex gap-2">
+        <button onclick="downloadFile('/download/kittenz123')" class="bg-accent text-white px-4 py-2 rounded hover:bg-blue-400">Download</button>
+        <button onclick="copyLink('/download/kittenz123')" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">Get Link</button>
+      </div>
+    </div>
+
+    <!-- Safe Image -->
+    <div class="space-y-3">
+      <h2 class="text-lg font-semibold">Safe Image</h2>
+      <div class="flex gap-2">
+        <button onclick="downloadFile('/download/cuteKitten')" class="bg-accent text-white px-4 py-2 rounded hover:bg-blue-400">Download</button>
+        <button onclick="copyLink('/download/cuteKitten')" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">Get Link</button>
+      </div>
+    </div>
+
+    <!-- Directory of Images -->
+    <div class="space-y-3">
+      <h2 class="text-lg font-semibold">Directory (ZIP)</h2>
+      <div class="flex gap-2">
+        <button onclick="downloadFile('/download/zip')" class="bg-success text-white px-4 py-2 rounded hover:bg-green-500">Download</button>
+        <button onclick="copyLink('/download/zip')" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">Get Link</button>
+      </div>
+    </div>
+
+    <p id="status" class="text-sm text-center text-gray-400"></p>
+  </div>
+
+  <script>
+    function downloadFile(endpoint) {
+      window.location.href = endpoint;
+    }
+
+    function copyLink(endpoint) {
+      const fullLink = window.location.origin + endpoint;
+      navigator.clipboard.writeText(fullLink).then(() => {
+        document.getElementById('status').innerText = `Link copied to clipboard`;
+      });
+    }
+  </script>
+
+</body>
+</html>
